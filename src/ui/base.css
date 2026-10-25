@@ -1,0 +1,96 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--ax-bg);
+  background-image: var(--ax-paper-texture);
+  color: var(--ax-text);
+  font-family: var(--ax-font);
+  font-size: var(--ax-text-md);
+  line-height: var(--ax-line);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--ax-font-serif);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: var(--ax-brand-700);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--ax-accent-strong);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: var(--ax-radius-pill);
+  background: var(--ax-border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ax-border-strong);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ax-ring);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--ax-selection);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

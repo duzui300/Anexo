@@ -1,0 +1,11 @@
+export const DB_KEY = 'anexo:db';
+export const CACHE_INDEX_KEY = 'anexo:cache:index';
+export const CACHE_SNAPSHOTS_KEY = 'anexo:cache:snapshots';
+export const CACHE_MINIMAP_KEY = 'anexo:cache:minimap';
+export const CACHE_FOLLOWUPS_KEY = 'anexo:cache:followups';
+export const BULK_JOB_KEY = 'anexo:bulkJob';
+export const SECRETS_IDB_NAME = 'anexo-secrets';
+export const SECRETS_IDB_STORE = 'keys';
+export const SESSION_SECRET_KEY = 'anexo:sessionKey';
+export const BACKUP_PREFIX = 'anexo:backup:';
+export const MAX_BACKUPS = 3;
