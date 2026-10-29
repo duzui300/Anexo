@@ -1,0 +1,121 @@
+:root,
+:host,
+.ax-root,
+[data-ax-theme='light'] {
+  color-scheme: light;
+
+  --ax-brand-700: #4a3328;
+  --ax-brand-600: #5c4033;
+  --ax-brand-500: #8b9d77;
+  --ax-brand-100: #e8ede0;
+  --ax-accent-300: #c7d3b5;
+  --ax-accent-500: #8b9d77;
+  --ax-accent-strong: #6f845d;
+
+  --ax-bg: #faf6f1;
+  --ax-bg-subtle: #f3ece1;
+  --ax-surface: #fffdf8;
+  --ax-surface-raised: #fffdf8;
+  --ax-surface-sunken: #efe7da;
+  --ax-hover: rgba(92, 64, 51, 0.06);
+  --ax-active: rgba(139, 157, 119, 0.16);
+  --ax-selection: rgba(139, 157, 119, 0.26);
+
+  --ax-text: #3c332b;
+  --ax-text-muted: #6f6458;
+  --ax-text-subtle: #7b7062;
+  --ax-text-inverse: #faf6f1;
+
+  --ax-border: #ddd2c2;
+  --ax-border-strong: #c8b9a6;
+  --ax-ring: #8b9d77;
+
+  --ax-danger: #a3543f;
+  --ax-danger-bg: #f7e8e1;
+  --ax-warning: #8a5a2b;
+  --ax-warning-bg: #f8efe1;
+  --ax-success: #5f7350;
+  --ax-success-bg: #eaf0e3;
+
+  --ax-shadow-sm: 0 1px 2px rgba(74, 55, 38, 0.06);
+  --ax-shadow-md: 0 10px 30px rgba(74, 55, 38, 0.1);
+  --ax-shadow-lg: 0 22px 50px rgba(74, 55, 38, 0.14);
+
+  --ax-radius-xs: 10px;
+  --ax-radius-sm: 12px;
+  --ax-radius-md: 16px;
+  --ax-radius-lg: 22px;
+  --ax-radius-xl: 30px;
+  --ax-radius-pill: 999px;
+  --ax-radius-organic: 1.6rem 1.2rem 1.5rem 1.3rem;
+
+  --ax-space-1: 4px;
+  --ax-space-2: 8px;
+  --ax-space-3: 12px;
+  --ax-space-4: 16px;
+  --ax-space-5: 20px;
+  --ax-space-6: 24px;
+  --ax-space-8: 32px;
+
+  --ax-font:
+    'Avenir Next', Avenir, 'Segoe UI Variable Text', 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', sans-serif;
+  --ax-font-serif:
+    'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, 'Noto Serif CJK SC',
+    'Noto Serif SC', 'Songti SC', SimSun, serif;
+  --ax-font-mono:
+    'SFMono-Regular', ui-monospace, 'Cascadia Code', 'Segoe UI Mono', Consolas, monospace;
+  --ax-text-xs: 11px;
+  --ax-text-sm: 12px;
+  --ax-text-md: 13px;
+  --ax-text-lg: 15px;
+  --ax-text-xl: 18px;
+  --ax-text-2xl: 24px;
+  --ax-text-3xl: 30px;
+  --ax-line: 1.5;
+  --ax-transition: 320ms ease-in-out;
+  --ax-transition-slow: 480ms ease-in-out;
+
+  --ax-paper-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' fill='%237b7062' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+[data-ax-theme='dark'] {
+  color-scheme: dark;
+
+  --ax-brand-700: #e3c9a8;
+  --ax-brand-600: #d6b48c;
+  --ax-brand-500: #b7c7a3;
+  --ax-brand-100: #2d3626;
+  --ax-accent-300: #cbd8b9;
+  --ax-accent-500: #a8b994;
+  --ax-accent-strong: #cbd8b9;
+
+  --ax-bg: #1d1915;
+  --ax-bg-subtle: #211d18;
+  --ax-surface: #28231d;
+  --ax-surface-raised: #312a22;
+  --ax-surface-sunken: #1a1612;
+  --ax-hover: rgba(214, 180, 140, 0.08);
+  --ax-active: rgba(183, 199, 163, 0.16);
+  --ax-selection: rgba(183, 199, 163, 0.26);
+
+  --ax-text: #f1e9db;
+  --ax-text-muted: #c4b7a5;
+  --ax-text-subtle: #a89a87;
+  --ax-text-inverse: #211d18;
+
+  --ax-border: #463d32;
+  --ax-border-strong: #5b4f41;
+  --ax-ring: #b7c7a3;
+
+  --ax-danger: #e8a08a;
+  --ax-danger-bg: #3a221b;
+  --ax-warning: #e2b87e;
+  --ax-warning-bg: #34291b;
+  --ax-success: #b7c7a3;
+  --ax-success-bg: #232b1d;
+
+  --ax-shadow-sm: 0 1px 2px rgba(12, 8, 4, 0.35);
+  --ax-shadow-md: 0 10px 30px rgba(12, 8, 4, 0.45);
+  --ax-shadow-lg: 0 22px 50px rgba(12, 8, 4, 0.55);
+}

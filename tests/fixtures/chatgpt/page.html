@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChatGPT mock — Anexo fixtures</title>
+    <script>
+      const axParams = new URLSearchParams(location.search);
+      document.documentElement.dataset.theme = axParams.get('theme') === 'light' ? 'light' : 'dark';
+    </script>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --m-bg: #212121;
+        --m-surface: #2f2f2f;
+        --m-surface-2: #383838;
+        --m-text: #ececec;
+        --m-muted: #b4b4b4;
+        --m-border: #4a4a4a;
+        font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; margin: 0; background: var(--m-bg); color: var(--m-text); }
+      .app { display: flex; height: 100vh; }
+      .sidebar {
+        width: 260px; flex: 0 0 260px; display: flex; flex-direction: column;
+        background: #171717; border-right: 1px solid var(--m-border); padding: 8px;
+      }
+      .sidebar__top { display: flex; gap: 8px; padding: 6px 4px 14px; }
+      .sidebar__button {
+        flex: 1; border: 1px solid var(--m-border); border-radius: 8px; padding: 8px 10px;
+        background: transparent; color: var(--m-text); text-align: left; font-size: 13px;
+      }
+      #history { flex: 1; min-height: 0; overflow-y: auto; padding: 4px 0; }
+      .history-group { padding: 4px 0 10px; }
+      .history-label { padding: 6px 8px; color: var(--m-muted); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+      .history-item { display: block; border-radius: 8px; padding: 7px 8px; color: var(--m-text); text-decoration: none; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .history-item:hover { background: var(--m-surface); }
+      .sidebar__footer { display: flex; align-items: center; gap: 8px; padding: 10px 8px; border-top: 1px solid var(--m-border); font-size: 12px; color: var(--m-muted); }
+      .avatar { width: 26px; height: 26px; border-radius: 50%; background: #10a37f; color: #fff; display: grid; place-items: center; font-size: 12px; font-weight: 700; }
+      .main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+      .main__header { display: flex; align-items: center; gap: 8px; padding: 12px 20px; border-bottom: 1px solid var(--m-border); font-size: 13px; color: var(--m-muted); }
+      .main__header strong { color: var(--m-text); font-weight: 600; }
+      .thread { flex: 1; overflow-y: auto; padding: 24px 20px 160px; }
+      .conversation-turn { max-width: 760px; margin: 0 auto 26px; }
+      .message { display: flex; gap: 12px; }
+      .message--user { justify-content: flex-end; }
+      .bubble { border-radius: 14px; padding: 12px 16px; font-size: 14px; line-height: 1.6; }
+      .message--user .bubble { background: var(--m-surface-2); max-width: 80%; }
+      .message--assistant .bubble { background: transparent; padding-left: 0; }
+      .markdown h1, .markdown h2, .markdown h3 { margin: 18px 0 8px; line-height: 1.3; }
+      .markdown h1 { font-size: 22px; }
+      .markdown h2 { font-size: 18px; }
+      .markdown h3 { font-size: 15px; }
+      .markdown p { margin: 10px 0; }
+      .markdown ul, .markdown ol { margin: 10px 0; padding-left: 22px; }
+      .markdown code { border-radius: 4px; padding: 2px 5px; background: #3a3a3a; font-family: ui-monospace, Consolas, monospace; font-size: 12.5px; }
+      .markdown pre { overflow-x: auto; border-radius: 10px; padding: 12px; background: #0d0d0d; }
+      .markdown pre code { background: transparent; padding: 0; }
+      .turn-actions { display: flex; gap: 4px; margin-top: 8px; }
+      .turn-actions button { border: 0; border-radius: 6px; padding: 3px 6px; background: transparent; color: var(--m-muted); font-size: 12px; }
+      .turn-actions button:hover { background: var(--m-surface); color: var(--m-text); }
+      .composer { position: sticky; bottom: 0; padding: 16px 20px 24px; background: linear-gradient(transparent, var(--m-bg) 40%); }
+      .composer form { max-width: 760px; margin: 0 auto; display: flex; align-items: flex-end; gap: 8px; border: 1px solid var(--m-border); border-radius: 16px; padding: 10px 10px 10px 16px; background: var(--m-surface); }
+      #prompt-textarea { flex: 1; min-height: 28px; max-height: 200px; padding: 6px 0; outline: none; font-size: 14px; line-height: 1.5; }
+      #prompt-textarea:empty::before { content: attr(data-placeholder); color: var(--m-muted); }
+      .composer button[type='submit'] { width: 32px; height: 32px; border: 0; border-radius: 8px; background: var(--m-text); color: var(--m-bg); font-weight: 700; }
+      .composer__hint { max-width: 760px; margin: 8px auto 0; text-align: center; color: var(--m-muted); font-size: 11px; }
+      html[data-theme='light'] { --m-bg: #ffffff; --m-surface: #f4f4f4; --m-surface-2: #ececec; --m-text: #0d0d0d; --m-muted: #666666; --m-border: #d9d9d9; }
+      html[data-theme='light'] .sidebar { background: #f9f9f9; }
+      html[data-theme='light'] .markdown pre { background: #f3f4f6; color: #111111; }
+      html[data-theme='light'] .markdown code { background: #e8eaed; }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <nav class="sidebar" aria-label="Chat history">
+        <div class="sidebar__top">
+          <button class="sidebar__button" type="button">New chat</button>
+          <button class="sidebar__button" type="button">Search chats</button>
+        </div>
+        <div id="history">
+          <div class="history-group">
+            <div class="history-label">Today</div>
+            <a class="history-item" href="/c/conv-anexo-1">Designing a local-first bookmark system</a>
+            <a class="history-item" href="/c/conv-anexo-2">Chrome MV3 service worker notes</a>
+          </div>
+          <div class="history-group">
+            <div class="history-label">Previous 7 days</div>
+            <a class="history-item" href="/c/conv-anexo-3">Prompt rewrite examples</a>
+            <a class="history-item" href="/c/conv-anexo-4">Minimap outline edge cases</a>
+          </div>
+          <div class="history-group">
+            <div class="history-label">Previous 30 days</div>
+            <a class="history-item" href="/c/conv-anexo-5">Exporting long threads to Markdown</a>
+          </div>
+        </div>
+        <div class="sidebar__footer">
+          <span class="avatar">U</span>
+          <span>Mock user</span>
+        </div>
+      </nav>
+
+      <main class="main">
+        <header class="main__header">
+          <strong>Designing a local-first bookmark system</strong>
+          <span>· GPT-5 · Mock</span>
+        </header>
+        <div class="thread" id="thread">
+          <article class="conversation-turn" data-testid="conversation-turn-1">
+            <div class="message message--user" data-message-author-role="user" data-message-id="msg-user-1" data-chatgpt-search-message-ids="msg-user-1">
+              <div class="bubble" data-user-message-bubble="true"><div class="markdown"><p>How should I design bookmarks that survive DOM changes?</p></div></div>
+            </div>
+          </article>
+
+          <article class="conversation-turn" data-testid="conversation-turn-2">
+            <div class="message message--assistant" data-message-author-role="assistant" data-message-id="msg-assistant-1" data-message-uuid="msg-assistant-1" data-chatgpt-selection-message-id="msg-assistant-1">
+              <div class="bubble">
+                <div class="markdown" data-message-content>
+                  <h2>Anchor to stable identifiers</h2>
+                  <p>Store a conversation ID plus a stable message ID. When the message list rerenders, resolve by ID first; fall back to turn index, role and a text hash.</p>
+                  <h3>Storage shape</h3>
+                  <pre><code>{
+  "conversationId": "conv-1",
+  "messageId": "msg-9",
+  "messageIndex": 4,
+  "preview": "Anchor to stable identifiers..."
+}</code></pre>
+                  <ul>
+                    <li>Keep previews short; do not duplicate entire conversations.</li>
+                    <li>Make jumps idempotent.</li>
+                    <li>Show an orphaned state when the conversation is gone.</li>
+                  </ul>
+                  <p>This works for bookmarks, notes and the minimap outline alike.</p>
+                </div>
+                <div class="turn-actions">
+                  <button type="button" aria-label="Copy">Copy</button>
+                  <button type="button" aria-label="Good response">Good</button>
+                  <button type="button" aria-label="Bad response">Bad</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="conversation-turn" data-testid="conversation-turn-3">
+            <div class="message message--user" data-message-author-role="user" data-message-id="msg-user-2">
+              <div class="bubble"><div class="markdown"><p>What about note highlights?</p></div></div>
+            </div>
+          </article>
+
+          <article class="conversation-turn" data-testid="conversation-turn-4">
+            <div class="message message--assistant" data-message-author-role="assistant" data-message-id="msg-assistant-2" data-message-uuid="msg-assistant-2">
+              <div class="bubble">
+                <div class="markdown" data-message-content>
+                  <h2>Use the CSS Custom Highlight API</h2>
+                  <p>Register ranges in <code>CSS.highlights</code> instead of wrapping text nodes. Highlights survive ChatGPT's React rerenders and never mutate the message DOM.</p>
+                  <h3>Steps</h3>
+                  <ol>
+                    <li>Resolve the anchor text within the message element.</li>
+                    <li>Create a <code>Range</code> for each match.</li>
+                    <li>Register it in a named <code>Highlight</code>.</li>
+                  </ol>
+                  <p>If the DOM structure changes, drop the highlight and retry on the next reconcile pass.</p>
+                </div>
+                <div class="turn-actions">
+                  <button type="button" aria-label="Copy">Copy</button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="composer">
+          <form data-chatgpt-composer>
+            <div id="prompt-textarea" contenteditable="true" data-placeholder="Message ChatGPT" role="textbox" aria-label="Message ChatGPT"></div>
+            <button type="submit" data-testid="send-button" aria-label="Send">↑</button>
+          </form>
+          <p class="composer__hint">ChatGPT mock page for Anexo fixtures. No real requests are sent.</p>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // Minimal SPA-ish behaviour so content scripts can observe navigation.
+      document.addEventListener('click', (event) => {
+        const link = event.target.closest?.('a.history-item');
+        if (!link) return;
+        event.preventDefault();
+        const url = link.getAttribute('href');
+        history.pushState({}, '', url);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+        window.dispatchEvent(new CustomEvent('wxt:locationchange', { detail: { newUrl: location.href } }));
+      });
+
+      if (axParams.get('clean') === '1') {
+        document.querySelectorAll('#history .history-item').forEach((el) => el.remove());
+      }
+
+      if (axParams.get('many') === '1') {
+        const thread = document.querySelector('#thread');
+        for (let i = 0; i < 24; i += 1) {
+          const turn = document.createElement('article');
+          turn.className = 'conversation-turn';
+          turn.dataset.testid = `conversation-turn-${thread.children.length + 1}`;
+          const role = i % 2 === 0 ? 'user' : 'assistant';
+          const id = `generated-${role}-${i}`;
+          const content =
+            role === 'user'
+              ? `<p>Follow-up question ${i / 2 + 1}: how does this behave when the conversation is long?</p>`
+              : `<h2>Long-conversation note ${(i + 1) / 2}</h2><p>Virtualization replaces nodes, so anchors must resolve by stable IDs. Keep a fallback fingerprint and retry on the next reconcile pass.</p><pre><code>resolveMessage("${id}")\n  .catch(() => resolveByIndex())</code></pre>`;
+          turn.innerHTML = `<div class="message message--${role}" data-message-author-role="${role}" data-message-id="${id}" data-message-uuid="${id}"><div class="bubble"><div class="markdown" data-message-content>${content}</div></div></div>`;
+          thread.appendChild(turn);
+        }
+      }
+
+      const composer = document.querySelector('#prompt-textarea');
+      document.querySelector('form[data-chatgpt-composer]')?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const text = composer?.textContent?.trim();
+        if (!text) return;
+        const thread = document.querySelector('#thread');
+        const turn = document.createElement('article');
+        turn.className = 'conversation-turn';
+        turn.dataset.testid = `conversation-turn-${thread.children.length + 1}`;
+        turn.innerHTML = `<div class="message message--user" data-message-author-role="user" data-message-id="msg-user-${Date.now()}"><div class="bubble"><div class="markdown"><p></p></div></div></div>`;
+        turn.querySelector('p').textContent = text;
+        thread.appendChild(turn);
+        composer.textContent = '';
+      });
+    </script>
+  </body>
+</html>

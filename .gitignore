@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build output
+.output/
+.wxt/
+stats.html
+web-ext.config.ts
+
+# Test output
+coverage/
+playwright-report/
+test-results/
+
+# Local-only UI reference captures (never publish)
+reference-local/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.log
+
+# Env
+.env
+.env.*
+!.env.example
